@@ -56,11 +56,11 @@ LogLevels = SimpleNamespace(**__loglevels)
 LoggingLevel = LogLevels.DISABLED
 
 __params_types = {'URL': 'URL', 
-                  'JSON': 'JSON'}
+                'JSON': 'JSON'}
 
 ParamsTypes = SimpleNamespace(**__params_types)
 
 __method_types = {'GET': 'GET', 
-                  'POST': 'POST'}
+                'POST': 'POST'}
 
 MethodTypes = SimpleNamespace(**__method_types)

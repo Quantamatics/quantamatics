@@ -11,12 +11,12 @@ AUTHOR_EMAIL = 'support@quantamatics.com'
 URL = "https://github.com/Quantamatics/quantamatics"
 LICENSE = ""
 
-VERSION = "1.0.0"
+VERSION = "0.9.0b"
 
 packages = ['quantamatics', 'quantamatics/core', 'quantamatics/data', 'quantamatics/providers']
 package_data = {'quantamatics': ['*']}
 
-classifiers = ['Development Status :: 5 - Production/Stable',
+classifiers = ['Development Status :: 4 - Beta',
                'Programming Language :: Python',
                'Programming Language :: Python :: 3',
                'Programming Language :: Python :: 3.4',
