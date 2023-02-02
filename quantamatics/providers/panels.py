@@ -8,11 +8,13 @@ from quantamatics.core.utils import OrderDataFrameColumns
 from quantamatics.core import settings
 from quantamatics.data.fundamentals import KPI, CalendarPeriods
 from quantamatics.data.securityMaster import Instrument
+from quantamatics.core.settings import DatasetTypes
 
 
 class Panel:
-    def __init__(self, panelName: str):
+    def __init__(self, panelName: str, panelDatasetType: str):
         self.panelName = panelName
+        self.panelDatasetType = panelDatasetType
         self.dataDF = None
         self.logger = QLog()
 
@@ -29,7 +31,9 @@ class Panel:
             self.providerID = resultDF['provider_id'].iloc[0]
             self.providerName = resultDF['provider_name'].iloc[0]
         elif len(resultDF) == 0:
-            raise QException('Panel not found')
+            self.panelID = None
+            self.providerID = None
+            self.providerName = None
         elif len(resultDF) > 1:
             raise QException('More than one panel found')
 

@@ -128,7 +128,7 @@ class Instrument:
 
 class Universe:
     def __init__(self, sector: str = None, industry: str = None, instrumentSymbol: str = None,
-                 instrumentSymbologyType: str = None, panelName: str = None):
+                 instrumentSymbologyType: str = None, panelDatasetType: str = None):
 
         if instrumentSymbologyType is None:
             instrumentSymbologyType = settings.DefaultSymbologyType
@@ -141,7 +141,7 @@ class Universe:
                 'industry': industry,
                 'instrumentSymbol': instrumentSymbol,
                 'instrumentSymbologyType': instrumentSymbologyType,
-                'panelName': panelName
+                'datasetType': panelDatasetType
             }
         )
 

@@ -7,10 +7,11 @@ from quantamatics.core.utils import QException
 from quantamatics.data.securityMaster import Instrument
 from quantamatics.data.fundamentals import KPI
 from quantamatics.providers.panels import Panel
+from quantamatics.core.settings import DatasetTypes
 
 class FacteusSummaryBase(Panel):
     def __init__(self, panelName):
-        super().__init__(panelName=panelName)
+        super().__init__(panelName=panelName, panelDatasetType = DatasetTypes.ConsumerCardPayments)
 
         self.mapping = {
             'measures': {

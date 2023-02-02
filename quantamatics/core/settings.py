@@ -29,6 +29,12 @@ __finstatements = {'IncomeStatement': 'Income Statement',
 
 FinancialStatements = SimpleNamespace(**__finstatements)
 
+# Panel Dataset types
+
+__datasettypes = {'ConsumerCardPayments': 'Consumer Card Payments'}
+
+DatasetTypes = SimpleNamespace(**__datasettypes)
+
 # Available Panels
 
 SupportedPanels = SimpleNamespace(**config.__panels)

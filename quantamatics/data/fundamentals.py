@@ -121,8 +121,8 @@ class KPI():
         self.measureName = self.KPIDF['measure_name'].iloc[0]
 
         self.brands = list(self.KPIDF.loc[pd.notna(self.KPIDF['brand_name'])]['brand_name'].drop_duplicates().values)
-        self.panels = list(
-            self.KPIDF.loc[pd.notna(self.KPIDF['dataset_name'])]['dataset_name'].drop_duplicates().values)
+        # self.panels = list(
+        #     self.KPIDF.loc[pd.notna(self.KPIDF['dataset_name'])]['dataset_name'].drop_duplicates().values)
 
     def getKPIHistory(self, valueType: str = 'Actual', datasetName: str = 'Company KPIs'):
 
@@ -167,13 +167,13 @@ class KPI():
 
 
 class FinancialStatement():
-    def __init__(self, instrumentID: int, panelID: int = None):
+    def __init__(self, instrumentID: int, panelDatasetType: str = None):
         self.instrumentID = instrumentID
-        self.panelID = panelID
+        self.panelDatasetType = panelDatasetType
 
-    def getKPIs(self, primary_only: bool = False, panelID: int = None):
-        if self.panelID is None and panelID is not None:
-            self.panelID = panelID
+    def getKPIs(self, primary_only: bool = False, panelDatasetType: str = None):
+        if self.panelDatasetType is None and panelDatasetType is not None:
+            self.panelDatasetType = panelDatasetType
 
         session = Session()
         self.KPIDF = session.apiWrapper(
@@ -181,20 +181,21 @@ class FinancialStatement():
             {
                 'instrumentId': self.instrumentID,
                 'primaryOnly': primary_only,
-                'panelId': self.panelID
+                'datasetType': self.panelDatasetType
             }
         )
 
         self.kpis = []
 
         for row in self.KPIDF.iterrows():
-            kpi = KPI(kpiID=row[1].kpi_id, kpiName=row[1].kpi_name, instrumentID=row[1].instrument_id,
-                      kpiUOM=row[1].unit_of_measure, preLoad=False)
+            kpi = KPI(kpiID=row[1].kpi_id, instrumentID=row[1].instrument_id, preLoad=False)
             self.kpis.append(kpi)
 
         return self.kpis
 
-    def getKPIList(self, primary_only: bool = False, panel_name: str = None, financial_statement: str = None):
+    def getKPIList(self, primary_only: bool = False, panelDatasetType: str = None, financial_statement: str = None):
+        if self.panelDatasetType is None and panelDatasetType is not None:
+            self.panelDatasetType = panelDatasetType
 
         session=Session()
         self.KPIDF = session.apiWrapper(
@@ -202,8 +203,7 @@ class FinancialStatement():
             {
                 'instrumentId': self.instrumentID,
                 'primaryOnly': primary_only,
-                'panelId': self.panelID,
-                'panelName': panel_name
+                'datasetType': self.panelDatasetType
             }
         )
 
